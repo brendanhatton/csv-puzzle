@@ -7,7 +7,7 @@ class CsvPuzzle {
             val segmentsSplitByQuotes = line.split("\"")
             val parsedLine = segmentsSplitByQuotes.flatMapIndexed { index, segment ->
                 if (index % 2 == 1) {
-                    //return quoted blob as ia
+                    //return quoted blob as is
                     listOf(segment)
                 } else {
                     //oustide of quoted blob so split commas
