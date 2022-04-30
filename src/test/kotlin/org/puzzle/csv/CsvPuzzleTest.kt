@@ -36,7 +36,7 @@ internal class CsvPuzzleTest {
         val result = parser.parseCSV("foo bar,\"Hello, world!\",\"and, again, barry\",bar")
         assertEquals(
             listOf(
-                listOf("foo bar", "Hello, world!",  "and, again, barry", "bar"),
+                listOf("foo bar", "Hello, world!", "and, again, barry", "bar"),
             ),
             result
         )
@@ -47,7 +47,28 @@ internal class CsvPuzzleTest {
         val result = parser.parseCSV("foo bar,\"Hello, world!\",\"and, again, barry\"")
         assertEquals(
             listOf(
-                listOf("foo bar", "Hello, world!",  "and, again, barry"),
+                listOf("foo bar", "Hello, world!", "and, again, barry"),
+            ),
+            result
+        )
+    }
+
+    @Test
+    internal fun testQuotedItemsAtStartAndEnd() {
+        val result = parser.parseCSV("\"foo, bar\",1 2 3,\"and, again, barry\"")
+        assertEquals(
+            listOf(
+                listOf("foo, bar", "1 2 3", "and, again, barry"),
+            ),
+            result
+        )
+    }
+    @Test
+    internal fun testAllQuotedItems() {
+        val result = parser.parseCSV("\"foo, bar\",\"Hello, world!\",\"and, again, barry\"")
+        assertEquals(
+            listOf(
+                listOf("foo, bar", "Hello, world!", "and, again, barry"),
             ),
             result
         )
